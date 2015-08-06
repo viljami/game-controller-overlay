@@ -63,19 +63,26 @@ h1 {
   });
 
   var o = {
-    x: 100,
-    y: 100,
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2,
     r: 10,
     c: 'rgba(0,255,0,1)'
   };
   o.image = GameController.createCircleImage(o.r, o.c);
   var outputs = GameController.outputs;
+  var joystick = outputs[0];
+  var buttonA = outputs[1];
 
   function update (){
     requestAnimationFrame(update);
 
-    o.x += outputs[0].nx < 0 ? -1 : outputs[0].nx > 0 ? 1 : 0;
-    o.y += outputs[0].ny < 0 ? -1 : outputs[0].ny > 0 ? 1 : 0;
+    o.x += joystick.nx < 0 ? -1 : joystick.nx > 0 ? 1 : 0;
+    o.y += joystick.ny < 0 ? -1 : joystick.ny > 0 ? 1 : 0;
+
+    if (buttonA.isDown){
+      o.x = window.innerWidth / 2;
+      o.y = window.innerHeight / 2;
+    }
 
     context.clearRect(0,0,window.innerWidth, window.innerHeight);
     context.drawImage(o.image, o.x - o.r, o.y - o.r);
