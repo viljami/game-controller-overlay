@@ -5,7 +5,7 @@ var serve = require('gulp-serve');
 var uglify = require('gulp-uglify');
 
 gulp.task('build', function(){
-  gulp.src('src/gamecontroller.js')
+  gulp.src('src/game-controller.js')
   .pipe(uglify({mangle: {
     GameController: false,
     window: false,
