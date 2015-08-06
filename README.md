@@ -29,6 +29,8 @@ All controls have
   * nx and ny coordinate which are relative to center and radius of the controls
   * if input is "down" is always indicated with "isDown" (useful for making buttons, modal joystics... )
 
+! nx and ny are not truly normalised. When touch is outside of the radius of the control the normalisation is greater than 1. Relative to difference between center point and radius of the component.
+
 ```
 if (joystick.isDown) ...  // => true / false
 ```
@@ -79,8 +81,4 @@ Please, feel free to send me feedback:
 In case you find bugs please submit them as github issues. I am open to all improvement ideas! 
 
 If you want to conribute I guess easiest way is to create a fork of this repository, commit you changes to the fork and create a pull request for me to review. At least for now. 
-
-## Todo:
-
-  * Improve nx and ny to be truly normalised by default
 
