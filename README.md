@@ -2,6 +2,8 @@
 
 Game controller overlay for touch capable devices. Purpose is to keep it as light weight as possible. 
 
+Test Game Controller here: http://viljami.github.io/game-controller-overlay/
+
 Inspired by: https://github.com/austinhallock/html5-virtual-game-controller
 
 ## Introduction
@@ -29,7 +31,7 @@ All controls have
   * nx and ny coordinate which are relative to center and radius of the controls
   * if input is "down" is always indicated with "isDown" (useful for making buttons, modal joystics... )
 
-! nx and ny are not truly normalised. When touch is outside of the radius of the control the normalisation is greater than 1. Relative to difference between center point and radius of the component.
+nx and ny are not truly normalised. When touch is outside of the radius of the control the normalisation is greater than 1. Relative to difference between center point and radius of the component.
 
 ```
 if (joystick.isDown) ...  // => true / false
