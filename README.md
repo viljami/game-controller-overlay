@@ -2,6 +2,10 @@
 
 Game controller overlay for touch capable devices. Purpose is to keep it as light weight as possible. 
 
+Inspired by: https://github.com/austinhallock/html5-virtual-game-controller
+
+## Introduction
+
 Initialise with needed controls and their positions
 
 ```
@@ -15,7 +19,7 @@ GameControls.init({
 });
 ```
 
-Use conrols in the order they were given to GameControls.
+Use controls in the order they were given to GameControls.
 
 ```
 var joystick = GameControls.outputs[0];
@@ -30,7 +34,7 @@ if (joystick.isDown) ...  // => true / false
 ```
 
 
-# Sample usage
+## Sample usage
 
 ``` 
   var o = new CoolCharacter();
@@ -67,7 +71,16 @@ if (joystick.isDown) ...  // => true / false
 
 ```
 
+## Improve
 
-# Todo:
+Please, feel free to send me feedback:
+  * twitter: https://twitter.com/viljamipeltola
+
+In case you find bugs please submit them as github issues. I am open to all improvement ideas! 
+
+If you want to conribute I guess easiest way is to create a fork of this repository, commit you changes to the fork and create a pull request for me to review. At least for now. 
+
+## Todo:
 
   * Improve nx and ny to be truly normalised by default
+
