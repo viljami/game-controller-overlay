@@ -118,6 +118,7 @@
     e.preventDefault();
     for (var i = 0; i < e.changedTouches.length; i++){
       var t = e.changedTouches[i];
+      if (! touches[t.identifier]) return;
       touches[t.identifier].x = t.clientX;
       touches[t.identifier].y = t.clientY;
       updateOutputs(touches[t.identifier]);
