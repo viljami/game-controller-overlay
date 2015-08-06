@@ -1,0 +1,85 @@
+<!Doctype html>
+<html>
+<head>
+<!-- <script src="gamecontroller.js"></script> -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<!--
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>
+* {
+  -webkit-overflow-scrolling: none;
+}
+</style>
+-->
+<script src="game-controller.js"></script>
+<style>
+* {
+  -webkit-overflow-scrolling: none;
+}
+
+html, body, canvas {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>
+</head>
+<body>
+<canvas></canvas>
+<script src="window-get-size.js"></script>
+<script>
+/* globals GameController */
+
+(function(){
+  'use strict';
+
+  var canvas = document.getElementsByTagName('canvas')[0];
+  var context = canvas.getContext('2d');
+
+  function resize(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener(resize);
+  resize();
+
+  GameController.init({
+    controls: [{
+      left: 60,
+      bottom: 60,
+      radius: 30,
+      color: 'rgba(0,0,0,0.7)'
+    }, {
+      right: 60,
+      bottom: 60,
+      radius: 20,
+      color: 'rgba(255,0,0,0.7)'
+    }]
+  });
+
+  var o = {
+    x: 100,
+    y: 100,
+    r: 10,
+    c: 'rgba(0,255,0,1)'
+  };
+  o.image = GameController.createCircleImage(o.r, o.c);
+  var outputs = GameController.outputs;
+
+  function update (){
+    requestAnimationFrame(update);
+
+    o.x += outputs[0].nx < 0 ? -1 : outputs[0].nx > 0 ? 1 : 0;
+    o.y += outputs[0].ny < 0 ? -1 : outputs[0].ny > 0 ? 1 : 0;
+
+    context.clearRect(0,0,window.innerWidth, window.innerHeight);
+    context.drawImage(o.image, o.x - o.r, o.y - o.r);
+  }
+  update();
+})();
+</script>
+</body>
+</html>

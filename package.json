@@ -1,0 +1,36 @@
+{
+  "name": "game-controller-overlay",
+  "main": "gamecontroller.js",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/viljami/game-controller-overlay.git"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-open": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-serve": "^1.0.0",
+    "gulp-uglify": "^1.2.0"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "description": "HTML5 Game Controller Overlay",
+  "bugs": {
+    "url": "https://github.com/viljami/game-controller-overlay/issues"
+  },
+  "homepage": "https://github.com/viljami/game-controller-overlay",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [
+    "Game",
+    "Controller",
+    "Overlay",
+    "JavaScript",
+    "HTML5"
+  ],
+  "author": "Viljami Peltola",
+  "license": "MIT"
+}
