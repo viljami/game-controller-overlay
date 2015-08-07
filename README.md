@@ -6,6 +6,18 @@ Test Game Controller here: http://viljami.github.io/game-controller-overlay/
 
 Inspired by: https://github.com/austinhallock/html5-virtual-game-controller
 
+## Development
+
+  * Build source:
+```
+gulp
+```
+
+  * Run test app ( starts at: http://localhost:3000 )
+```
+gulp serve
+```
+
 ## Introduction
 
 Initialise with needed controls and their positions
