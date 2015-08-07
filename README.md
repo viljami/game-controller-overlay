@@ -6,6 +6,8 @@ Test Game Controller here: http://viljami.github.io/game-controller-overlay/
 
 Inspired by: https://github.com/austinhallock/html5-virtual-game-controller
 
+Tested with: iPhone 5
+
 ## Development
 
   * Build source:
