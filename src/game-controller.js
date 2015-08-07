@@ -2,6 +2,9 @@
  'use strict';
 
   var PI2 = Math.PI * 2;
+
+  var canvas;
+  var context;
   var controls = [];
   var fullWindowStyles = [
     'width: 100%',
@@ -12,25 +15,19 @@
     'overflow: hidden',
     'position: fixed',
     'top: 0',
-    'left: 0'
+    'left: 0',
+    'bottom: 0',
+    'right: 0'
   ].join(';');
   var outputs = [];
+  var parentElement;
+  var positioner = {
+    top: function(o, y){ o.y = y; },
+    right: function(o, x){ o.x = window.innerWidth - x; },
+    bottom: function(o, y){ o.y = window.innerHeight - y; },
+    left: function(o, x){ o.x = x; }
+  };
   var touches = [];
-
-  function createId(){ return Date.now(); }
-  function defer (fn){ setTimeout(fn, 10); }
-  function extend (a, b){
-    Object.keys(b).forEach(function(k){ a[k] = b[k]; });
-    return a;
-  }
-  function unit(n){ return n > 1 ? 1 : n < -1 ? -1 : n; }
-
-  function testCircle (circle, point){
-    return point.x < circle.x + circle.radius &&
-      point.x > circle.x - circle.radius &&
-      point.y < circle.y + circle.radius &&
-      point.y > circle.y - circle.radius;
-  }
 
   function createCircleImage(radius, color){
     var canvas = document.createElement('canvas');
@@ -48,15 +45,23 @@
     context.fill();
     return canvas;
   }
+  function createId(){ return Date.now(); }
+  function defer (fn){ setTimeout(fn, 10); }
+  function extend (a, b){
+    Object.keys(b).forEach(function(k){ a[k] = b[k]; });
+    return a;
+  }
+  function testCircle (circle, point){
+    return point.x < circle.x + circle.radius &&
+      point.x > circle.x - circle.radius &&
+      point.y < circle.y + circle.radius &&
+      point.y > circle.y - circle.radius;
+  }
+  function unit(n){ return n > 1 ? 1 : n < -1 ? -1 : n; }
 
-  var positioner = {
-    top: function(o, y){ o.y = y; },
-    right: function(o, x){ o.x = window.innerWidth - x; },
-    bottom: function(o, y){ o.y = window.innerHeight - y; },
-    left: function(o, x){ o.x = x; }
-  };
 
   function Control(){}
+
   Control.prototype.init = function(options){
     extend(this, options);
     this.id = createId();
@@ -66,16 +71,19 @@
       if (positioner[k]) positioner[k](this, options[k]);
     }, this);
 
-    controls.push(this);
     outputs.push({
       nx: 0,
       ny: 0,
       isDown: false
     });
+
+    return this;
   };
+
   Control.prototype.draw = function(context){
     context.drawImage(this.image, this.x - this.radius, this.y - this.radius);
   };
+
 
   function clearOutput(touch){
     for (var i = 0; i < controls.length; i++){
@@ -134,11 +142,14 @@
     }
   }
 
+
   var GameController = {
     outputs: outputs,
-    createCircleImage: createCircleImage,
+    createCircleImage: createCircleImage, // Todo: remove
 
     /**
+     * GameController is fullscreen singleton (for now)
+     *
      * options = {controls: [{control1}, {control2}, ... ]}
      * control = {
         left|right: pixels
@@ -148,21 +159,20 @@
       }
      */
     init: function(options){
-      var canvas = document.createElement('canvas');
-      var context = canvas.getContext('2d');
-      canvas.style.cssText = fullWindowStyles;
-      document.body.appendChild(canvas);
+      if (canvas) return;
 
-      var joystick = new Control();
-      var button = new Control();
+      parentElement = options.parentElement || document.body;
+      canvas = options.canvas || document.createElement('canvas');
+
+      context = canvas.getContext('2d');
+      controls = [];
+
+      canvas.style.cssText = fullWindowStyles;
+      parentElement.appendChild(canvas);
 
       options.controls.forEach(function(controlOptions){
-        (new Control()).init(controlOptions);
+        controls.push((new Control()).init(controlOptions));
       });
-
-      canvas.addEventListener('touchstart', touchstart);
-      canvas.addEventListener('touchmove', touchmove);
-      canvas.addEventListener('touchend', touchend);
 
       function resize() {
         canvas.width = window.innerWidth;
@@ -177,9 +187,24 @@
           });
         });
       }
-
       window.addEventListener('resize', resize);
       resize();
+    },
+
+    enable: function(){
+      if (! canvas) return;
+      canvas.style.display = 'block';
+      canvas.addEventListener('touchstart', touchstart);
+      canvas.addEventListener('touchmove', touchmove);
+      canvas.addEventListener('touchend', touchend);
+    },
+
+    disable: function(){
+      if (! canvas) return;
+      canvas.style.display = 'none';
+      canvas.addEventListener('touchstart', touchstart);
+      canvas.addEventListener('touchmove', touchmove);
+      canvas.addEventListener('touchend', touchend);
     }
   };
 
