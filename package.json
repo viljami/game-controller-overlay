@@ -1,7 +1,7 @@
 {
   "name": "game-controller-overlay",
   "main": "gamecontroller.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/viljami/game-controller-overlay.git"
