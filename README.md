@@ -34,7 +34,8 @@ GameControls.init({
   }]
 });
 
-GameControls.enable(); // start listening input
+GameControls.enable(); // start listening input and if not shown show controls
+// GameControls.disable(); // hide and disable controls
 ```
 
 Use controls in the order they were given to GameControls.
