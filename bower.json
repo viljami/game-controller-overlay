@@ -1,0 +1,28 @@
+{
+  "name": "game-controller-overlay",
+  "version": "0.0.3",
+  "homepage": "http://viljami.github.io/game-controller-overlay/",
+  "authors": [
+    "Viljami Peltola <viljami.peltola@iki.fi>"
+  ],
+  "description": "HTML5 game controller overlay for touch devices.",
+  "main": "dist/game-controller.min.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "HTML5",
+    "Game",
+    "GameController",
+    "Mobile",
+    "Touch"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
