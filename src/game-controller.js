@@ -150,8 +150,13 @@
     /**
      * GameController is fullscreen singleton (for now)
      *
-     * options = {controls: [{control1}, {control2}, ... ]}
-     * control = {
+     * options = {
+     *   parentElement: parent of canvas (optional)
+     *   canvas: canvasElement (optional)
+     *   controls: [{controlDefinition}, {controlDefinition}, ... ]
+     *  }
+     *
+     * controlDefinition = {
         left|right: pixels
         top|bottom: pixels
         radius: pixels
@@ -168,7 +173,7 @@
       controls = [];
 
       canvas.style.cssText = fullWindowStyles;
-      parentElement.appendChild(canvas);
+      if (! canvas.parentElement) parentElement.appendChild(canvas);
 
       options.controls.forEach(function(controlOptions){
         controls.push((new Control()).init(controlOptions));

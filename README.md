@@ -23,6 +23,8 @@ gulp serve
 Initialise with needed controls and their positions
 
 ```
+// Init prepares controls and shows them. 
+// To start listening input call GameControls.enable()
 GameControls.init({
   controls: [{
     left|right: pixels,
@@ -31,6 +33,8 @@ GameControls.init({
     color: 'rgba(0,f,0,1)' | '#00ff00'  
   }]
 });
+
+GameControls.enable(); // start listening input
 ```
 
 Use controls in the order they were given to GameControls.
@@ -69,6 +73,8 @@ if (joystick.isDown) ...  // => true / false
     }]
   });
 
+  GameControls.enable();
+
   var joystick = GameController.outputs[0];
   var buttonA = GameController.outputs[1];
 
@@ -86,6 +92,13 @@ if (joystick.isDown) ...  // => true / false
   update();
 
 ```
+
+## Options
+
+  * parentElement (optional) - Where to place the canvas (default: document.body) 
+    * if canvas has already parent option.parentElement does not have effect
+  * canvas (optional) - CanvasElement to use  
+  * controls - array of control definitions (compulsory in case you want controls) 
 
 ## Improve
 
