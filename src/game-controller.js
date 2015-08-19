@@ -111,6 +111,8 @@
 
   function touchstart(e){
     e.preventDefault();
+    e.stopPropagation();
+
     for (var t, i = 0; i < e.changedTouches.length; i++) {
       t = e.changedTouches[i];
       touches[t.identifier] = updateOutputs({
@@ -124,6 +126,8 @@
 
   function touchmove(e){
     e.preventDefault();
+    e.stopPropagation();
+
     for (var i = 0; i < e.changedTouches.length; i++){
       var t = e.changedTouches[i];
       if (! touches[t.identifier]) return;
@@ -135,6 +139,8 @@
 
   function touchend(e){
     e.preventDefault();
+    e.stopPropagation();
+
     for (var id, i = 0; i < e.changedTouches.length; i++){
       id = e.changedTouches[i].identifier;
       clearOutput(touches[id]);
